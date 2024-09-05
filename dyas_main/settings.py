@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-sah0c=xf+bizle!l+g^gmqa1t&oe&xe3_yo_aeak4kkdz)c_jz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "http://pbp.cs.ui.ac.id/widya.mutia/DyasCommerce"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "widya-mutia-DyasCommerce.pbp.cs.ui.ac.id"]
 
 
 # Application definition
