@@ -33,10 +33,12 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1", "widya-mutia-DYAsCommerce.pbp.cs.ui.a
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+     'main.apps.MainConfig',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'dyas_commerce'
 ]
 
 MIDDLEWARE = [
