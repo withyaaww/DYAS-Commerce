@@ -62,7 +62,7 @@ sehingga aplikasi saya dapat diakses oleh teman-teman melalui internet.
 
 Buat bagan yang menunjukkan alur dari request client ke web aplikasi Django dan respons yang dikembalikan. Jelaskan bagaimana `urls.py`, `views.py`, `models.py`, dan berkas `html` saling terkait dalam proses ini.
 
-![Bagan]("https://github.com/withyaaww/dyas-commerce/blob/main/bagan.jpg")
+![Bagan]("bagan.jpg)
 
 
 ***
