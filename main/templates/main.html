@@ -4,26 +4,26 @@
     <title>Detail Produk</title>
 </head>
 <body>
-    <h1>Selamat Datang di DYA'S Commerce</h1>
+    <h1><center>DYA'S Commerce</center></h1>
+    <p><center>─────────────── ⋆⋅☆⋅⋆ ───────────────</center></p>
 
-    <p>Halo! ini adalah DYA's Commerce, platform online inovatif untuk para gamer!</p>
+    <p><center>Halo! ini adalah DYA's Commerce, platform online inovatif untuk para gamer!</center></p>
 
     <h2>Deskripsi Produk: </h2>
     <p>{{ description }}</p>
 
-    <h2>Fitur Tambahan: </h2>
-    <p>{{ additional_features }}</p>
-
+    
     <h2>Detail Produk:</h2>
     <p>Nama: {{ name }}</p>
     <p>Harga: ${{ price }}</p>
-    <p>Stok: {{ stock }}</p>
     <p>Kategori: {{ category }}</p>
-
-    <!-- nambahin gambar produk-->
-    {% if image %}
-        <img src="{{ image.url }}" alt="{{ name }}">
-    {% endif %}
+    
+    <h2>Fitur Tambahan: </h2>
+    <p>{{ additional_features }}</p>
+    <!-- nambahin gambar produk
+    {% if product.image %}
+    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+{% endif %} -->
 
    
 </body>

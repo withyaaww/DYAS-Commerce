@@ -32,10 +32,10 @@ INSTALLED_APPS = [
 `price : IntegerField`  
 `description : TextField`  
 
-Akan tetapi saya juga menambahkan beberapa atribut seperti:  
+Akan tetapi saya juga menambahkan 2 atribut yaitu:  
 `stock : IntegerField`  
 `category : CharField`  
-`image : ImageField`
+<!-- `image : ImageField` -->
 
 **5. Membuat sebuah fungsi pada `views.py` untuk dikembalikan ke dalam sebuah template HTML yang menampilkan nama aplikasi serta nama dan kelas.**
 
