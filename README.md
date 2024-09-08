@@ -1,9 +1,11 @@
 **Nama**: Widya Mutia Ichsan  
 **NPM**: 2306165912  
 **Kelas**: PBP E  
+--- 
 
 Aplikasi PWS yang sudah di-deploy dapat diakses melalui tautan berikut:  
 [http://pbp.cs.ui.ac.id/widya.mutia/dyascommerce](http://pbp.cs.ui.ac.id/widya.mutia/dyascommerce)
+
 
 ***
 
@@ -23,7 +25,7 @@ Langkah ke-3 yaitu menambahkan 'main' dan 'dyascommerce' ke dalam daftar aplikas
 INSTALLED_APPS = [
     ...,
     'main',
-    'dyascommerce'
+    'dyas_commerce'
 ]
 ```
 
@@ -38,16 +40,30 @@ Akan tetapi saya juga menambahkan 2 atribut yaitu:
 <!-- `image : ImageField` -->
 
 **5. Membuat sebuah fungsi pada `views.py` untuk dikembalikan ke dalam sebuah template HTML yang menampilkan nama aplikasi serta nama dan kelas.**
+Pada langkah ke-5, saya membuka berkas views.py yang terletak pada direktori main, kemudian mendeklarasikan sebuah fungsi bernama *show_main*, yang akan menerima parameter *request*. Fungsi yang saya buat ini akan mengatur permintaan HTTP dan mengembalikan tampilan yang sesuai sehingga akan mengembalikan ke dalam direktori template berisi file html yang akan menampilkan nama
+    
 
 **6. Membuat sebuah routing pada `urls.py` aplikasi main untuk memetakan fungsi yang telah dibuat pada `views.py`.**
 
-**7. Melakukan deployment ke PWS terhadap aplikasi yang sudah dibuat sehingga nantinya dapat diakses oleh teman-temanmu melalui Internet.**
+**7. Melakukan deployment ke PWS terhadap aplikasi yang sudah dibuat sehingga nantinya dapat diakses oleh teman-temanmu melalui Internet.**<br>
+Pada tahap ini, saya melakukan deploy ke PWS dengan menambahkan alamat PWS ke dalam repository menggunakan perintah:<br> 
+    `git remote add pws https://pbp.cs.ui.ac.id/widya.mutia/dyascommerce.`
+
+Selanjutnya, saya mengubah nama branch dari "master" ke "main" menggunakan perintah:<br>
+    `git branch -M master.`
+
+Setelah itu, saya melakukan push ke PWS dengan perintah 
+    `git push pws master`
+sehingga aplikasi saya dapat diakses oleh teman-teman melalui internet.
 
 ***
 
 ### Bagan yang Berisi Request Client ke Web Aplikasi Berbasis Django Beserta Responnya
 
 Buat bagan yang menunjukkan alur dari request client ke web aplikasi Django dan respons yang dikembalikan. Jelaskan bagaimana `urls.py`, `views.py`, `models.py`, dan berkas `html` saling terkait dalam proses ini.
+
+![Bagan]("https://github.com/withyaaww/dyas-commerce/blob/main/bagan.jpg")
+
 
 ***
 
