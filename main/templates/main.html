@@ -1,16 +1,30 @@
-<h1>Selamat Datang di DYA'S Commerce</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detail Produk</title>
+</head>
+<body>
+    <h1>Selamat Datang di DYA'S Commerce</h1>
 
     <p>Halo! ini adalah DYA's Commerce, platform online inovatif untuk para gamer!</p>
 
-    <h2>Deskripsi: </h2>
+    <h2>Deskripsi Produk: </h2>
     <p>{{ description }}</p>
 
     <h2>Fitur Tambahan: </h2>
     <p>{{ additional_features }}</p>
 
-    <h3>Detail Pemilik: </h3>
-    <p>NPM: {{ npm }}</p>
+    <h2>Detail Produk:</h2>
     <p>Nama: {{ name }}</p>
-    <p>Kelas: {{ class }}</p>
+    <p>Harga: ${{ price }}</p>
+    <p>Stok: {{ stock }}</p>
+    <p>Kategori: {{ category }}</p>
 
+    <!-- nambahin gambar produk-->
+    {% if image %}
+        <img src="{{ image.url }}" alt="{{ name }}">
+    {% endif %}
 
+   
+</body>
+</html>

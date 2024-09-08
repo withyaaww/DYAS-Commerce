@@ -1,6 +1,45 @@
-# DYAS-Commerce
-Halo! ini adalah DYA's Commerce
+Nama : Widya Mutia Ichsan
+NPM : 2306165912
+Kelas : PBP E
 
-Dya's Commerce adalah platform online inovatif yang dikhususkan untuk penjualan berbagai fitur game, termasuk avatar, pakaian karakter, aksesoris, dan item virtual lainnya yang dapat digunakan dalam berbagai permainan online. Kami menyediakan koleksi eksklusif yang dirancang khusus untuk memberikan pengalaman bermain game yang lebih personal dan menarik. Dengan pilihan yang beragam, para gamer dapat menyesuaikan tampilan karakter mereka sesuai dengan gaya dan kepribadian unik mereka, menjadikan setiap momen dalam permainan lebih hidup dan penuh warna.
+Aplikasi PWS yang sudah di-deploy dapat diakses melalui tautan berikut:
+[http://pbp.cs.ui.ac.id/widya.mutia/dyascommerce](http://pbp.cs.ui.ac.id/widya.mutia/dyascommerce)
 
-Selain itu, Dya's Commerce juga menawarkan berbagai fitur tambahan seperti paket peningkatan level, item langka, dan konten premium lainnya yang semuanya dapat diakses dengan mudah melalui platform kami. Kami berkomitmen untuk menyediakan produk berkualitas tinggi dengan harga yang bersaing, serta didukung oleh layanan pelanggan yang responsif dan profesional. Tujuan kami adalah memberikan pengalaman belanja yang menyenangkan dan memuaskan bagi semua pengguna, sehingga mereka dapat menikmati permainan favorit mereka dengan lebih maksimal.
+***
+**Penjelasan implementasi tugas *step-bystep* (bukan hanya sekadar mengikuti tutorial).**
+
+
+**1. Membuat sebuah proyek Django baru.**
+    Untuk langkah pertama saya membuat sebuah proyek django bernama *dyascommerce* menggunakan command :
+    `django-admin startproject dyascommerce`
+
+**2. Membuat aplikasi dengan nama main pada proyek tersebut.**
+    Langkah kedua yaitu membuat aplikasi baru bernama **main** di dalam proyek menggunakan perintah :
+    `python manage.py starapp main`
+
+**3. Melakukan routing pada proyek agar dapat menjalankan aplikasi main.**
+    Langkah ke-3 yaitu menambahkan 'main' dan 'dyascommerce' ke dalam daftar aplikasi
+
+    `INSTALLED_APPS = [
+    ...,
+    'main',
+    'dyascommerce'`
+]`
+
+**4. Membuat model pada aplikasi main dengan nama Product dan memiliki atribut wajib sebagai berikut.**
+
+` name : CharField
+    price : IntegerField
+    description : TextField `
+
+    akan tetapi saya juga menambahkan beberapa atribut seperti:
+
+` stock : IntegerField 
+    category : CharField
+     image: ImageField `
+
+
+
+
+
+
