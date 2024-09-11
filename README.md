@@ -8,7 +8,7 @@ Aplikasi PWS yang sudah di-deploy dapat diakses melalui tautan berikut:
 
 
 ***
-###                  TUGAS INDIVIDU 2
+#                  TUGAS INDIVIDU 2
 
 ### Penjelasan Implementasi Tugas *Step-by-Step* (Bukan Hanya Sekadar Mengikuti Tutorial)
 
@@ -115,22 +115,143 @@ Karena Django adalah framework yang populer dan banyak digunakan dalam pengemban
 Karena berfungsi sebagai jembatan antara objek-objek dalam kode Python dan tabel-tabel dalam database relasional.
 
 ---
-###         TUGAS INDIVIDU 3
----
- 1. mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
+#         TUGAS INDIVIDU 3
 
- 2. mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+ ### 1. Mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?<br>
+    
+karena untuk mengumpulkan, mengolah, dan menganalisis data pelanggan secara efektif, sehingga membantu perusahaan membuat keputusan bisnis yang lebih cerdas dan meningkatkan efisiensi operasional.
 
- 3. Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
+ ### 2. mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
 
- 4. Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+ Keduanya sama-sama bagus, akan tetapi jika dibandingkan JSON lebih populer karena kemudahannya, kinerjanya yang lebih cepat, dan kompatibilitasnya yang baik dengan JS, membuatnya ideal untuk pengembangan web modern. Namun, XML masih memiliki kelebihan dalam struktur data yang lebih kompleks dan interoperabilitas antar platform, sehingga masih digunakan dalam beberapa konteks tertentu.
 
- 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+ ### 3. Jelaskan fungsi dari method `is_valid()` pada form Django dan mengapa kita membutuhkan method tersebut?
+
+ fungsi dari `is_valid()` yaitu untuk memvalidasi data input dari user, kita memerlukan method tersebut karena untuk memastikan data yang diterima aman, sesuai, dan sia diproses atau disimpan.<br> 
+ 
+ Selain itu method ini juga membantu dalam pengelolaan kesalahan input yang bisa ditampilkan kembali kepada pengguna
+
+ ### 4. Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+
+Kita memerlukan `csrf_token` karena alasan keamanan. Token ini secara otomatis di-*generate* oleh Django untuk mencegah serangan **Cross-Site Request Forgery (CSRF)**, di mana penyerang dapat memanfaatkan sesi pengguna yang valid untuk mengirim permintaan tanpa izin pengguna.
+
+ Jika kita **tidak menambahkan** `csrf_token`, maka penyerang dapat memalsukan permintaan atas nama pengguna tanpa sepengetahuan mereka.<br>
+ 
+Selain itu permintaan berbahaya seperti perubahan data, penghapusan informasi penting, atau bahkan transaksi dapat dilakukan tanpa otorisasi pengguna.
+
+### Cara penyerang memanfaatkannya yaitu dengan
+membuat halaman atau skrip berbahaya yang ketika pengguna mengunjungi halaman tersebut, hal tersebut dapat mengirimkan permintaan tanpa otorisasi ke aplikasi Django yang sedang digunakan oleh pengguna yang telah login, sehingga terjadi manipulasi data atau tindakan lain yang tidak diinginkan.
+
+### 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 
  ---
-  Step 1 : Membuat input form...
-  Step 2 : Menambahkan 4 fungsi views yaitu XML, JSON, XML by  ID, dan JSON by ID.
-  Step 3 : Membuat routing URL 
+
+### **Step 1: Membuat Input Form**
+1. **Buat Model**: Pertama,  buat model `MoodEntry` di `models.py`untuk entri mood, 
+
+   ```python
+   from django.db import models
+   import uuid
+
+   class MoodEntry(models.Model):
+       id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+       nama_lengkap = models.CharField(max_length=255)
+       time = models.DateField(auto_now_add=True)
+       deskripsi = models.TextField()
+       jumlah_character = models.IntegerField()
+   ```
+
+2. **Buat Form**: Buat form dengan menggunakan `ModelForm` di `forms.py` 
+
+   ```python
+   from django import forms
+   from .models import MoodEntry
+
+   class MoodEntryForm(forms.ModelForm):
+       class Meta:
+           model = MoodEntry
+           fields = ['nama_lengkap', 'deskripsi', 'jumlah_character']
+   ```
+
+3. **Buat Template**: Di `templates/create_mood_entry.html`, buat form dengan memasukkan `csrf_token`.
+   ```html
+   {% extends 'base.html' %} 
+   {% block content %}
+   <h1>Login Page</h1>
+
+   <form method="POST">
+     {% csrf_token %}
+     {{ form.as_table }}
+     <input type="submit" value="Daftar" />
+   </form>
+
+   {% endblock %}
+   ```
+
+### **Step 2: Menambahkan Fungsi Views**
+1. **XML View**: Buat view untuk nampilin data dalam format XML.
+   ```python
+   from django.http import HttpResponse
+   from django.core import serializers
+   from .models import MoodEntry
+
+   def show_xml(request):
+       data = MoodEntry.objects.all()
+       return HttpResponse(serializers.serialize('xml', data), content_type='application/xml')
+   ```
+
+2. **JSON View**: Buat view untuk nampilin data dalam format JSON.
+   ```python
+   from django.http import JsonResponse
+
+   def show_json(request):
+       data = list(MoodEntry.objects.values())
+       return JsonResponse(data, safe=False)
+   ```
+
+3. **XML by ID View**: Buat view untuk nampilin data berdasarkan ID dalam format XML.
+   ```python
+   def show_xml_by_id(request, id):
+       try:
+           mood_entry = MoodEntry.objects.get(pk=id)
+           data = serializers.serialize('xml', [mood_entry])
+           return HttpResponse(data, content_type='application/xml')
+       except MoodEntry.DoesNotExist:
+           return HttpResponse(status=404)
+   ```
+
+4. **JSON by ID View**: Buat view buat nampilin data berdasarkan ID dalam format JSON.
+   ```python
+   def show_json_by_id(request, id):
+       try:
+           mood_entry = MoodEntry.objects.get(pk=id)
+           data = {
+               'id': str(mood_entry.id),
+               'nama_lengkap': mood_entry.nama_lengkap,
+               'time': mood_entry.time,
+               'deskripsi': mood_entry.deskripsi,
+               'jumlah_character': mood_entry.jumlah_character
+           }
+           return JsonResponse(data)
+       except MoodEntry.DoesNotExist:
+           return JsonResponse({'error': 'Not found'}, status=404)
+   ```
+
+### **Step 3: Membuat Routing URL**
+1. **Update `urls.py`**: nambahin path untuk views yang udah dibuat di `urls.py`.
+   ```python
+   from django.urls import path
+   from .views import show_main, create_mood_entry, show_xml, show_json, show_xml_by_id, show_json_by_id
+
+   urlpatterns = [
+       path('', show_main, name='main'),
+       path('mood/add/', create_mood_entry, name='add_mood'),
+       path('mood/xml/', show_xml, name='mood_xml'),
+       path('mood/json/', show_json, name='mood_json'),
+       path('mood/xml/<uuid:id>/', show_xml_by_id, name='mood_xml_by_id'),
+       path('mood/json/<uuid:id>/', show_json_by_id, name='mood_json_by_id'),
+   ]
+   ```
 
 ---
 ### Mengakses URL XML pada Postman
