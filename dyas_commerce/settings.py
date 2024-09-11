@@ -131,4 +131,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-CSRF_TRUSTED_ORIGINS = ["http://localhost","http://127.0.0.1","http://pbp.cs.ui.ac.id/widya.mutia/dyascommerce", "https://pbp.cs.ui.ac.id/widya.mutia/dyascommerce"]
+CSRF_TRUSTED_ORIGINS = ["http://localhost","http://127.0.0.1","https://pbp.cs.ui.ac.id/widya.mutia/dyascommerce", "http://pbp.cs.ui.ac.id/widya.mutia/dyascommerce"]
