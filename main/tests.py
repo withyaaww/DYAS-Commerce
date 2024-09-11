@@ -24,3 +24,5 @@ class mainTest(TestCase):
           mood_intensity = 8,
         )
         self.assertTrue(mood.is_mood_strong)
+
+        
