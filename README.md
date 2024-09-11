@@ -8,6 +8,7 @@ Aplikasi PWS yang sudah di-deploy dapat diakses melalui tautan berikut:
 
 
 ***
+###                  TUGAS INDIVIDU 2
 
 ### Penjelasan Implementasi Tugas *Step-by-Step* (Bukan Hanya Sekadar Mengikuti Tutorial)
 
@@ -114,3 +115,35 @@ Karena Django adalah framework yang populer dan banyak digunakan dalam pengemban
 Karena berfungsi sebagai jembatan antara objek-objek dalam kode Python dan tabel-tabel dalam database relasional.
 
 ---
+###         TUGAS INDIVIDU 3
+---
+ 1. mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
+
+ 2. mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+
+ 3. Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
+
+ 4. Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+
+ 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
+ ---
+  Step 1 : Membuat input form...
+  Step 2 : Menambahkan 4 fungsi views yaitu XML, JSON, XML by  ID, dan JSON by ID.
+  Step 3 : Membuat routing URL 
+
+---
+### Mengakses URL XML pada Postman
+![alt text](image-2.png)
+
+### Mengakses URL JSON pada Postman
+
+![alt text](image-3.png)
+
+### Mengakses URL XML by ID pada Postman
+![alt text](image-4.png)
+
+### Mengakses URL JSON by ID pada Postman
+
+![alt text](image-5.png)
+
