@@ -68,10 +68,12 @@
             </tr>
             {% for mood_entry in mood_entries %}
             <tr>
-                <td>{{ mood_entry.mood }}</td>
-                <td>{{ mood_entry.time }}</td>
-                <td>{{ mood_entry.feelings }}</td>
-                <td>{{ mood_entry.mood_intensity }}</td>
+                <td>{{ mood_entry.nama_lengkap }}</td>
+                <td>{{ mood_entry.time}}</td>
+                <td>{{ mood_entry.deskripsi }}</td>
+                <td>{{ mood_entry.jumlah_character }}</td>
+                <!-- <td>{{ mood_entry.feelings }}</td>
+                <td>{{ mood_entry.mood_intensity }}</td> -->
             </tr>
             {% endfor %}
         </table>
@@ -85,3 +87,5 @@
 
 </body>
 </html>
+
+
