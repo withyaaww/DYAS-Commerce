@@ -1,91 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Produk - DYA'S Commerce</title>
+    <title>DYA'S Flowers</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        .separator {
-            margin: 20px 0;
-            font-size: 24px;
-            font-weight: bold;
-        }
         table {
-            margin: 0 auto;
+            width: 100%;
             border-collapse: collapse;
-            width: 80%;
+            margin: 20px 0;
         }
         th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #f4f4f4;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
         }
         button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
+            background-color: #007BFF;
+            color: #fff;
             border: none;
+            padding: 10px 20px;
+            font-size: 1em;
             cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
         button:hover {
-            background-color: #45a049;
+            background-color: #0056b3;
         }
     </style>
 </head>
+<header>
+    <h1 style="text-align: center;">DYA'S Flowers</h1>
+    <p style="text-align: center;">𓍢ִ໋🌷͙֒─────────────── ⋆⋅☆⋅⋆ ───────────────𓍢ִ໋🌷͙֒</p>
+</header>
 <body>
+    <div style="text-align: center;">
+        <p>Halo! Ini adalah DYA'S Flowers, platform online inovatif untuk bunga rajut handmade!</p>
+        <h2>Deskripsi Produk:</h2>
+        <p>{{ description }}</p>
+        
+        <h2>Detail Produk:</h2>
+        <p>Nama: {{ name }}</p>
+        <p>Harga: Rp. {{ price }}</p>
+        <p>Stok: {{ stock }}</p>
+        <p>Kategori: {{ category }}</p>
 
-    <h1>DYA'S Commerce</h1>
-    <p class="separator">─────────────── ⋆⋅☆⋅⋆ ───────────────</p>
+        <h2>Fitur Tambahan:</h2>
+        <p>{{ additional_features }}</p>
+        
+        <!-- Uncomment and adjust if you have product images
+        {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" style="display: block; margin: 0 auto;">
+        {% endif %}
+        -->
+        
+        <h1>Flower List</h1>
+        
+        {% if not products %}
+            <p>Belum ada data bunga pada toko ini.</p>
+        {% else %}
+            <table>
+                <tr>
+                    <th>Flower Name</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Stock</th>
+                    <th>Category</th>
+                </tr>
 
-<p>Halo! Ini adalah DYA's Commerce, platform online inovatif untuk para gamer!</p>
-
-<h2>Deskripsi Produk: </h2>
- <p>{{ description }}</p>
-
-    <h2>Detail Produk:</h2>
-    <p>Nama: {{ name }}</p>
-    <p>Harga: Rp.{{ price }}</p>
-    <p>Kategori: {{ category }}</p>
-    <p>Stock: {{ stock }}</p>
-
-    <h2>Fitur Tambahan: </h2>
-    <p>{{ additional_features }}</p>
-
-    {% if not mood_entries %}
-        <p>Akun anda belum terdaftar.</p>
-    {% else %}
-        <table>
-            <tr>
-                <th>Nama Lengkap</th>
-                <th>Time</th>
-                <th>Deskripsi character</th>
-                <th>jumlah character</th>
-            </tr>
-            {% for mood_entry in mood_entries %}
-            <tr>
-                <td>{{ mood_entry.nama_lengkap }}</td>
-                <td>{{ mood_entry.time}}</td>
-                <td>{{ mood_entry.deskripsi }}</td>
-                <td>{{ mood_entry.jumlah_character }}</td>
-                <!-- <td>{{ mood_entry.feelings }}</td>
-                <td>{{ mood_entry.mood_intensity }}</td> -->
-            </tr>
-            {% endfor %}
-        </table>
-    {% endif %}
-
-    <br>
-
-    <a href="{% url 'main:create_mood_entry' %}">
-        <button>Daftarkan Sekarang</button>
-    </a>
-
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>Rp {{ product.price }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.stock }}</td>
+                    <td>{{ product.category }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+        
+        <br />
+        
+        <a href="{% url 'main:create_flowers' %}">
+            <button>Add New Flower</button>
+        </a>
+    </div>
 </body>
 </html>
-
-
+{% endblock content %}

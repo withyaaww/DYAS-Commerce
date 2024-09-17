@@ -1,3 +1,10 @@
+<div align="center">
+  <h2>𓍢ִ໋🌷͙֒₊˚*ੈ♡ Welcome to DYA'S ⸝⸝𓍢ִ໋ 🌷͙֒₊˚⋆</h2>
+</div>     
+
+![alt text](image-3.png)
+
+***
 **Nama**: Widya Mutia Ichsan  
 **NPM**: 2306165912  
 **Kelas**: PBP E  
@@ -6,6 +13,10 @@
 Aplikasi PWS yang sudah di-deploy dapat diakses melalui tautan berikut:  
 [http://pbp.cs.ui.ac.id/widya.mutia/dyascommerce](http://pbp.cs.ui.ac.id/widya.mutia/dyascommerce)
 
+---
+#                   Table of Contents
+- [TUGAS INDIVIDU 2](#tugas-individu-2)
+- [TUGAS INDIVIDU 3](#tugas-individu-3)
 
 ***
 #                  TUGAS INDIVIDU 2
@@ -147,49 +158,15 @@ membuat halaman atau skrip berbahaya yang ketika pengguna mengunjungi halaman te
  ---
 
 ### **Step 1: Membuat Input Form**
-1. **Buat Model**: Pertama,  buat model `MoodEntry` di `models.py`untuk entri mood, 
+1. **Buat Form**: Buat form dengan menggunakan `ModelForm` di `forms.py` 
 
-   ```python
-   from django.db import models
-   import uuid
-
-   class MoodEntry(models.Model):
-       id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-       nama_lengkap = models.CharField(max_length=255)
-       time = models.DateField(auto_now_add=True)
-       deskripsi = models.TextField()
-       jumlah_character = models.IntegerField()
-   ```
-
-2. **Buat Form**: Buat form dengan menggunakan `ModelForm` di `forms.py` 
-
-   ```python
-   from django import forms
-   from .models import MoodEntry
-
-   class MoodEntryForm(forms.ModelForm):
-       class Meta:
-           model = MoodEntry
-           fields = ['nama_lengkap', 'deskripsi', 'jumlah_character']
-   ```
-
-3. **Buat Template**: Di `templates/create_mood_entry.html`, buat form dengan memasukkan `csrf_token`.
-   ```html
-   {% extends 'base.html' %} 
-   {% block content %}
-   <h1>Login Page</h1>
-
-   <form method="POST">
-     {% csrf_token %}
-     {{ form.as_table }}
-     <input type="submit" value="Daftar" />
-   </form>
-
-   {% endblock %}
-   ```
+2. **Buat Template**: Di `templates/create_flowers.html`, buat form dengan memasukkan `csrf_token`.
+   
 
 ### **Step 2: Menambahkan Fungsi Views**
-1. **XML View**: Buat view untuk nampilin data dalam format XML.
+1. masuk ke views.py dan buat function baru untuk nampilin data dalam format XML, JSON, XML by ID dan JSON by ID(jangan lupa buat import `HttpResponse` dan `serializers`).
+
+**XML View**:
    ```python
    from django.http import HttpResponse
    from django.core import serializers
@@ -200,7 +177,7 @@ membuat halaman atau skrip berbahaya yang ketika pengguna mengunjungi halaman te
        return HttpResponse(serializers.serialize('xml', data), content_type='application/xml')
    ```
 
-2. **JSON View**: Buat view untuk nampilin data dalam format JSON.
+**JSON View**
    ```python
    from django.http import JsonResponse
 
@@ -209,7 +186,7 @@ membuat halaman atau skrip berbahaya yang ketika pengguna mengunjungi halaman te
        return JsonResponse(data, safe=False)
    ```
 
-3. **XML by ID View**: Buat view untuk nampilin data berdasarkan ID dalam format XML.
+**XML by ID View**
    ```python
    def show_xml_by_id(request, id):
        try:
@@ -220,7 +197,7 @@ membuat halaman atau skrip berbahaya yang ketika pengguna mengunjungi halaman te
            return HttpResponse(status=404)
    ```
 
-4. **JSON by ID View**: Buat view buat nampilin data berdasarkan ID dalam format JSON.
+**JSON by ID View**
    ```python
    def show_json_by_id(request, id):
        try:
@@ -238,33 +215,22 @@ membuat halaman atau skrip berbahaya yang ketika pengguna mengunjungi halaman te
    ```
 
 ### **Step 3: Membuat Routing URL**
-1. **Update `urls.py`**: nambahin path untuk views yang udah dibuat di `urls.py`.
-   ```python
-   from django.urls import path
-   from .views import show_main, create_mood_entry, show_xml, show_json, show_xml_by_id, show_json_by_id
-
-   urlpatterns = [
-       path('', show_main, name='main'),
-       path('mood/add/', create_mood_entry, name='add_mood'),
-       path('mood/xml/', show_xml, name='mood_xml'),
-       path('mood/json/', show_json, name='mood_json'),
-       path('mood/xml/<uuid:id>/', show_xml_by_id, name='mood_xml_by_id'),
-       path('mood/json/<uuid:id>/', show_json_by_id, name='mood_json_by_id'),
-   ]
-   ```
+**Update `urls.py`**: nambahin path untuk views yang udah dibuat di `urls.py`.
+  
+   
 
 ---
-### Mengakses URL XML pada Postman
-![alt text](image-2.png)
+### POSTMAN 
 
-### Mengakses URL JSON pada Postman
+#### XML
+![alt text](image-6.png)
 
-![alt text](image-3.png)
+#### JSON 
+![alt text](image-7.png)
 
-### Mengakses URL XML by ID pada Postman
-![alt text](image-4.png)
+### XML by ID
+![alt text](image-8.png)
 
-### Mengakses URL JSON by ID pada Postman
-
-![alt text](image-5.png)
+### JSON by ID 
+![alt text](image-9.png)
 
