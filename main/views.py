@@ -13,7 +13,7 @@ def show_main(request):
         'price': 50000,
         'category': 'Handmade Crochet Flowers',
         'stock': 100,
-        'description': 'DYA\'S Crochet Flowers adalah platform online yang menjual bunga rajut handmade yang indah dan unik. Setiap bunga dibuat dengan hati-hati dan penuh cinta, menjadikannya hadiah sempurna atau dekorasi cantik untuk rumah Anda.\n'
+        'description': 'DYA\'S Flowers adalah platform online yang menjual bunga rajut handmade yang indah dan unik. Setiap bunga dibuat dengan hati-hati dan penuh cinta, menjadikannya hadiah sempurna atau dekorasi cantik untuk rumah Anda.\n'
                        '\t Kami juga menawarkan berbagai varian bunga rajut dalam berbagai warna dan ukuran, sehingga pelanggan dapat memilih sesuai dengan keinginan mereka.',
         'additional_features': "Selain produk-produk unik, kami juga menyediakan paket custom untuk bunga rajut yang disesuaikan dengan permintaan Anda."
     }
