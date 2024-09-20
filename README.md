@@ -234,3 +234,55 @@ membuat halaman atau skrip berbahaya yang ketika pengguna mengunjungi halaman te
 ### JSON by ID 
 ![alt text](image-9.png)
 
+---
+##      TUGAS INDIVIDU 4
+---
+### 1. **Perbedaan HttpResponseRedirect() dan redirect()**
+`HttpResponseRedirect`: Hanya menerima URL langsung dan tidak memproses penamaan URL atau objek view.
+`redirect`: Lebih fleksibel karena bisa menerima URL string, nama view, atau model instance.
+
+### 2. **Cara menghubungkan model Product dengan User**
+   Model Product dan User bisa dihubungkan dengan relasi `ForeignKey`. Dengan menggunakan `ForeignKey`, sebuah model Product bisa dikaitkan dengan banyak instance dari model User, sehingga hubungan antar kedua model ini dapat terhubung dengan baik. 
+
+```python
+...
+from django.contrib.auth.models import User #pastikan sudah mengimpor ni terlebih dahulu
+class Product(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+...
+```
+### 3. Perbedaan antara Autentikasi dan Otorisasi saat Pengguna Login
+
+**Autentikasi** adalah proses yang digunakan untuk memverifikasi identitas pengguna. Tujuannya adalah memastikan bahwa pengguna yang mencoba mengakses sistem atau aplikasi adalah orang yang benar-benar mereka klaim.
+
+#### Contoh:
+Saat pengguna login ke **Dyas Flowers**, mereka diminta untuk memasukkan username dan password. Django akan memeriksa username dan password yang dimasukkan terhadap database untuk memastikan apakah kredensial tersebut valid. Jika valid, Django akan mengizinkan pengguna untuk mengakses fitur dan halaman yang dilindungi.
+
+Setelah pengguna berhasil melakukan autentikasi, **otorisasi** berfungsi untuk menentukan hak akses mereka dalam aplikasi. Django mengatur apa yang diizinkan dan tidak diizinkan bagi pengguna untuk dilakukan. Django menyediakan decorators seperti `@login_required`, yang memastikan hanya pengguna yang terautentikasi yang dapat mengakses halaman tertentu.
+
+
+### 4. Bagaimana Django Mengingat Pengguna yang Telah Login dan Keamanan Cookies
+
+Django mengingat pengguna yang telah login melalui sistem **session**, di mana ID pengguna disimpan dalam database dan dikirim ke browser sebagai **cookie**. Saat pengguna kembali, Django membaca cookie sesi untuk memverifikasi apakah pengguna masih terautentikasi. Untuk keamanan, Django menerapkan beberapa langkah, seperti menggunakan **secure cookies**, mengatur cookie agar tidak dapat diakses melalui JavaScript, dan menggunakan beberapa atribut untuk melindungi dari serangan CSRF.
+
+
+### 5. **Langkah-langkah Implementasi Checklist**
+
+1. **Step 1:**<br> Mengimplementasikan Fungsi Registrasi, Login, dan Logout dengan menggunakan **Django auth views** untuk membuat fitur registrasi, login dan logout, serta memastikan untuk menambahkan URL routing yang sesuai dalam `urls.py`.
+
+2. **Step 2**<br> Membuat Dua Akun Pengguna. Setelah mengimplementasikan fungsi registrasi, buat dua akun pengguna secara manual, kemudian membuat tiga dummy data untuk masing-masing akun.
+
+
+3. **Step 3: Menghubungkan Model Product dengan User** <br> Untuk menghubungkan model **Product** dengan model **User**, perlu menambahkan field `ForeignKey` dalam file model **Product**. Contoh implementasi dapat dilihat pada langkah [nomor 2](###2.-**Cara-menghubungkan-model-Product-dengan-User**).
+
+
+4. **Step 4**<br> Menampilkan Informasi Pengguna yang Sedang Login, Untuk menampilkan informasi pengguna yang sedang login, dapat menggunakan cookie untuk menyimpan dan menampilkan waktu login terakhir, dengan cara menambahkan kode berikut dalam fungsi `show_main` yang ada di dalam view :
+
+```python
+def show_main(request):
+    ...
+    last_login = request.COOKIES.get('last_login')
+    ...
+```
+
+pastikan bahwa sudah memperbarui isi dari file html

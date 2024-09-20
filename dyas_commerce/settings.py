@@ -24,7 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ag@@2xm+yt4%9%6bl4xlq(qsv7k5b0-t61ev@d#!@2y(4r6y6m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+PRODUCTION = os.getenv("PRODUCTION", False)
+DEBUG = not PRODUCTION
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "widya-mutia-dyascommerce.pbp.cs.ui.ac.id"]
 
