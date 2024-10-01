@@ -391,9 +391,6 @@ def delete_pesanan(request, id):
 Jangan lupa mastiin buat import `reserve` dan hubungin urlnya di `urls.py`
 
 ---
-Berikut adalah contoh isi README yang lebih lengkap untuk proyek kustomisasi desain pada template HTML, termasuk kustomisasi halaman login, register, halaman daftar produk, dan navbar responsif. Kamu bisa menyesuaikannya lebih lanjut sesuai kebutuhan:
-
----
 
 # Kustomisasi Desain pada Template HTML
 
