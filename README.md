@@ -17,6 +17,8 @@ Aplikasi PWS yang sudah di-deploy dapat diakses melalui tautan berikut:
 #                   Table of Contents
 - [TUGAS INDIVIDU 2](#tugas-individu-2)
 - [TUGAS INDIVIDU 3](#tugas-individu-3)
+- [TUGAS INDIVIDU 4](#tugas-individu-4)
+
 
 ***
 #                  TUGAS INDIVIDU 2
