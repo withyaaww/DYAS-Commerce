@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from main.forms import ProductForm
 from main.models import Product
 
@@ -50,11 +50,11 @@ def show_json(request):
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def show_xml_by_id(request, id):
-    data = Product.objects.filter(pk="2365d94e-8370-4bf3-aba3-a12e2ad76e62")
+    data = Product.objects.filter(pk = id)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
 def show_json_by_id(request, id):
-    data = Product.objects.filter(pk="2365d94e-8370-4bf3-aba3-a12e2ad76e62")
+    data = Product.objects.filter(pk = id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def register(request):
@@ -92,3 +92,29 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
+
+def edit_pesanan(request, id):
+    # Ambil data produk berdasarkan id yang diterima dari URL
+    product = Product.objects.get(pk=id)
+
+    # Set product sebagai instance dari form
+    form = ProductForm(request.POST or None, instance=product)
+
+    if form.is_valid() and request.method == "POST":
+        # Simpan form dan kembali ke halaman utama
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_pesanan.html", context)
+
+
+def delete_pesanan(request, id):
+    # Ambil produk berdasarkan id yang diterima dari URL
+    pesanan = Product.objects.get(pk=id)
+
+    # Hapus produk
+    pesanan.delete()
+
+    # Kembali ke halaman utama
+    return HttpResponseRedirect(reverse('main:show_main'))
