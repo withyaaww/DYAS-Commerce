@@ -4,19 +4,27 @@
 {% block content %}
 {% include 'navbar.html' %}
 
+<script>
+    document.getElementById('navbar').addEventListener('click', function(event) {
+        // Logika interaksi saat navbar diklik
+        console.log('Navbar clicked!', event.target);
+        // Contoh interaksi: navigasi atau efek lain
+    });
+</script>
+
 <div class="bg-white overflow-x-hidden px-4 md:px-8 pb-8 pt-24 min-h-screen bg-gray-100 flex flex-col">
 
   <!-- Header Section -->
   <header class="text-center mb-6">
-    <h1 class="text-4xl font-bold bg-gradient-to-b from-[#312E81] to-[#5954DC] text-transparent bg-clip-text">
+    <h1 id="home" class="text-4xl font-bold bg-gradient-to-b from-[#312E81] to-[#5954DC] text-transparent bg-clip-text">
         𓍢ִ໋🌷 DYA'S Flowers 𓍢ִ໋🌷
     </h1>    
     <p class="text-lg mt-2 text-indigo-600">𓍢ִ໋🌷͙֒─────────────── ⋆⋅☆⋅⋆ ───────────────𓍢ִ໋🌷͙֒</p>
   </header>
 
   <!-- Description and Product Details Section -->
-  <div class="text-center mb-8">
-    <h2 class="text-4xl font-bold bg-gradient-to-b from-[#312E81] to-[#5954DC] text-transparent bg-clip-text">
+  <div  class="text-center mb-8">
+    <h2  class="text-4xl font-bold bg-gradient-to-b from-[#312E81] to-[#5954DC] text-transparent bg-clip-text">
         Detail Produk:
     </h2>
     <div class="flex flex-col items-center mt-4 space-y-4">
@@ -43,10 +51,10 @@
         </div>
     </div>
     
-    <h2 class="text-4xl font-bold bg-gradient-to-b from-[#312E81] to-[#5954DC] text-transparent bg-clip-text mt-4">
+    <h2 id="category" class="text-4xl font-bold bg-gradient-to-b from-[#312E81] to-[#5954DC] text-transparent bg-clip-text mt-4">
         Kategori
     </h2>
-    <p class="text-lg mt-2 text-indigo-600">
+    <p  class="text-lg mt-2 text-indigo-600">
         𓍢ִ໋⋆⋅☆⋅⋆ ─────────────── 𓍢ִ໋🌷 {{ category }} 𓍢ִ໋🌷 ─────────────── ⋆⋅☆⋅⋆
     </p>
     
@@ -61,13 +69,10 @@
         </div>
     </div>
     
-  
-
-  <!-- Flower List Section -->
-  <h2 class="text-4xl font-bold bg-gradient-to-b from-[#312E81] to-[#5954DC] text-transparent bg-clip-text mt-4 mb-4">
-    𓍢ִ໋🌷 Flower List 𓍢ִ໋🌷
-</h2>
-  <!-- <div class="overflow-x-auto shadow-lg rounded-lg bg-white"> -->
+    <!-- Flower List Section -->
+    <h2 id="cart" class="text-4xl font-bold bg-gradient-to-b from-[#312E81] to-[#5954DC] text-transparent bg-clip-text mt-4 mb-4">
+        𓍢ִ໋🌷 Flower List 𓍢ִ໋🌷
+    </h2>
 
     {% if not products %}
     <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
@@ -81,7 +86,6 @@
             <!-- Pin di atas card -->
             <div class="absolute -top-6 left-[-10px] transform -translate-x-0 w-12 h-12 bg-[#FDE6CA] rounded-md shadow-md mb-4"></div>
 
-    
             <!-- Card dengan warna latar belakang gradien -->
             <div class="bg-gradient-to-b from-[#312E81] to-[#5954DC] shadow-lg rounded-lg break-inside-avoid flex flex-col border-2 border-blue-400 transform rotate-2 hover:rotate-1 transition-transform duration-300 animate-wiggle">
                 <div class="p-4">
@@ -108,10 +112,7 @@
         </div>
         {% endfor %}
     </div>
-    
-    
-{% endif %}
-    
+    {% endif %}
     
     <!-- Add New Flower Button -->
     <div class="flex justify-center mt-8">
@@ -127,7 +128,8 @@
         </a>
     </div>
     <div class="flex justify-center mt-8">   
-        <h5 class="text-gray-600">Sesi terakhir login: {{ last_login }}</h5>
+        <h5 class="text-gray-600">Last login: {{ last_login }}</h5>   
     </div>
- 
+</div>
+
 {% endblock content %}

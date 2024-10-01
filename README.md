@@ -18,6 +18,7 @@ Aplikasi PWS yang sudah di-deploy dapat diakses melalui tautan berikut:
 - [TUGAS INDIVIDU 2](#tugas-individu-2)
 - [TUGAS INDIVIDU 3](#tugas-individu-3)
 - [TUGAS INDIVIDU 4](#tugas-individu-4)
+- [TUGAS INDIVIDU 5](#tugas-individu-5)
 
 
 ***
@@ -292,12 +293,243 @@ pastikan bahwa sudah memperbarui isi dari file html
 ---
 #           TUGAS INDIVIDU 5
 ---
-### 1. Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+## Urutan Prioritas CSS Selector
 
-### 2. Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!
+Dalam CSS, urutan prioritas pengambilan selector ditentukan oleh spesifisitas dan urutan penulisan. Berikut adalah urutan prioritas yang umum:
 
-### 3. Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+1. *Inline Styles*
+2. *ID Selector*
+3. *Class Selector*
+4. *Element Selector*
+5. *Universal Selector* <br>
 
-### 4. Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+kalo misal ada beberapa selector dengan spesifisitas yang sama, maka selector yang ditulis terakhir dalam CSS bakal diterapin.
 
-### 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+## Pentingnya Responsive Design
+
+Responsive design menjadi konsep yang penting dalam pengembangan aplikasi web karena:
+
+- *Aksesibilitas*
+- *SEO yang Lebih Baik*
+- *Pengalaman Pengguna*
+
+### Contoh Aplikasi
+- *Aplikasi Responsif*<br>
+misal situs web seperti Amazon dan Facebook menerapkan desain responsif dengan baik.
+- *Aplikasi Tidak Responsif*<br>
+ misalnya ada beberapa situs berita lama tidak mendukung desain responsif, membuatnya sulit diakses melalui perangkat mobile.
+
+## Perbedaan Margin, Border, dan Padding
+
+- **Margin**: Ruang di luar batas elemen. Margin memisahkan elemen dari elemen lain.
+- **Border**: Garis yang mengelilingi elemen. Border dapat memiliki warna dan ketebalan.
+- **Padding**: Ruang di dalam batas elemen, antara konten dan border.
+
+### Implementasi
+contoh implementasi ketiga properti di atas dalam CSS yaitu:
+```css
+.element {
+    margin: 20px; /* untuk mengatur margin */
+    border: 1px solid black; /* untuk mengatur border */
+    padding: 10px; /* untuk mengatur padding */
+}
+```
+
+## Konsep Flexbox dan Grid Layout
+
+### Flexbox
+Flexbox adalah model layout CSS yang memungkinkan elemen dalam kontainer fleksibel untuk disusun secara efisien dalam satu dimensi (baris atau kolom). <br>
+
+Fungsinya biasanya termasuk:
+- Untuk menyusun elemen secara responsif.
+- Untuk mengatur ruang antara elemen dengan mudah.
+
+### Grid Layout
+Grid Layout adalah model layout dua dimensi yang memungkinkan penataan elemen dalam baris dan kolom.<br>
+
+Fungsinya biasanya termasuk:
+- Untuk membuat tata letak kompleks dengan lebih mudah.
+- Untuk mengontrol ukuran dan posisi elemen secara lebih presisi.
+
+## Implementasi Checklist
+
+Untuk mengimplementasikan checklist di atas secara step-by-step:
+
+---
+1. Implementasikan fungsi untuk menghapus dan mengedit product.
+ngebuat dua function di `views.py`:<br>
+
+```python
+
+def edit_pesanan(request, id):
+    # Ambil data produk berdasarkan id yang diterima dari URL
+    product = Product.objects.get(pk=id)
+
+    # Set product sebagai instance dari form
+    form = ProductForm(request.POST or None, instance=product)
+
+    if form.is_valid() and request.method == "POST":
+        # Simpan form dan kembali ke halaman utama
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_pesanan.html", context)
+
+
+def delete_pesanan(request, id):
+    # Ambil produk berdasarkan id yang diterima dari URL
+    pesanan = Product.objects.get(pk=id)
+
+    # Hapus produk
+    pesanan.delete()
+
+    # Kembali ke halaman utama
+    return HttpResponseRedirect(reverse('main:show_main'))
+```
+
+Jangan lupa mastiin buat import `reserve` dan hubungin urlnya di `urls.py`
+
+---
+Berikut adalah contoh isi README yang lebih lengkap untuk proyek kustomisasi desain pada template HTML, termasuk kustomisasi halaman login, register, halaman daftar produk, dan navbar responsif. Kamu bisa menyesuaikannya lebih lanjut sesuai kebutuhan:
+
+---
+
+# Kustomisasi Desain pada Template HTML
+
+Proyek ini bertujuan untuk menerapkan kustomisasi desain pada template HTML menggunakan Tailwind CSS dan JavaScript, khususnya pada halaman login, register, dan halaman daftar produk. Selain itu, navbar yang responsif juga telah diterapkan untuk meningkatkan pengalaman pengguna.
+
+## Kustomisasi Halaman Login dan Register
+
+Saya telah memodifikasi file `login.py` dan `register.py` dengan menambahkan animasi menggunakan Tailwind CSS dan JavaScript. Berikut adalah contoh penerapannya:
+
+### Contoh Kode Animasi dengan Tailwind CSS
+
+```html
+<!-- Animasi dengan Tailwind CSS -->
+<style>
+  .animate-slide-down {
+    animation: slideDown 1s ease-out forwards;
+  }
+
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+</style>
+```
+
+### Contoh Kode untuk Animasi Teks dengan JavaScript
+
+```javascript
+<!-- JavaScript for Typing Animation -->
+<script>
+  const text = "Login to your account";
+  let index = 0;
+  
+  function typeText() {
+    if (index < text.length) {
+      document.getElementById('typing-text').innerHTML += text.charAt(index);
+      index++;
+      setTimeout(typeText, 100);
+    }
+  }
+</script>
+```
+
+## Kustomisasi Halaman Daftar Produk
+
+Pada halaman `Add New Flower`, saya menerapkan logika untuk menangani dua kondisi berbeda:
+
+- **Jika aplikasi belum memiliki produk yang tersimpan**: Tampilkan pesan atau elemen yang menginformasikan pengguna bahwa tidak ada produk.
+- **Jika sudah ada produk yang tersimpan**: Tampilkan daftar produk yang ada.
+
+### Contoh Pseudocode
+
+```python
+ {% if not products %}
+    <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+        <img src="{% static 'image/dyasxoxo.jpeg' %}" alt="ayoo beli:P" class="w-96 h-96 mb-4"/>
+        <p class="text-center text-gray-600">Belum ada pesanan untuk saat ini, ayo beli :((</p>
+    </div>
+    {% else %}
+    <div class="flex flex-wrap justify-center">
+        {% for product in products %}
+        <div class="relative break-inside-avoid mb-4 mx-4 mt-4">
+            <!-- Pin di atas card -->
+            <div class="absolute -top-6 left-[-10px] transform -translate-x-0 w-12 h-12 bg-[#FDE6CA] rounded-md shadow-md mb-4"></div>
+
+            <!-- Card dengan warna latar belakang gradien -->
+            <div class="bg-gradient-to-b from-[#312E81] to-[#5954DC] shadow-lg rounded-lg break-inside-avoid flex flex-col border-2 border-blue-400 transform rotate-2 hover:rotate-1 transition-transform duration-300 animate-wiggle">
+                <div class="p-4">
+                    <h3 class="text-4xl font-bold bg-gray-100 text-white bg-clip-text mt-4">
+                        𓍢ִ໋🌷 {{ product.name }} 𓍢ִ໋🌷
+                    </h3>
+                </div>
+                <div class="p-5 text-gray-700">
+                    <p class="font-semibold text-lg text-white mb-2">Description:</p>
+                    <p class="font-medium text-white">{{ product.description }}</p>
+                    <p class="font-medium text-white">Rp. {{ product.price }}</p>
+                    <p class="font-medium text-white">Stock: {{ product.stock }}</p>
+                    <p class="font-medium text-white">Category: {{ product.category }}</p>
+                </div>
+                <div class="flex justify-between p-4 border-t border-gray-300">
+                    <a href="{% url 'main:edit_pesanan' product.id %}" class="bg-yellow-500 hover:bg-yellow-600 text-white rounded-full px-4 py-2 transition duration-300 shadow-lg">
+                        Edit
+                    </a>
+                    <a href="{% url 'main:delete_pesanan' product.id %}" class="bg-red-500 hover:bg-red-600 text-white rounded-full px-4 py-2 transition duration-300 shadow-lg">
+                        Delete
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+```
+
+## Styling untuk Setiap Kartu Produk
+
+Untuk setiap kartu produk, saya menggunakan styling dari Tailwind CSS, termasuk:
+
+- **Background Color**: Warna latar belakang menggunakan kelas Tailwind.
+- **Padding dan Margin**: Menggunakan kelas padding dan margin untuk mengatur jarak.
+- **Border dan Shadow**: Menambahkan border dan efek bayangan untuk membuat kartu lebih menarik.
+
+### Contoh Kode untuk Kartu Produk
+
+```html
+<div class="bg-white shadow-lg rounded-lg p-4">
+  <h2 class="text-lg font-bold">Nama Produk</h2>
+  <p class="text-gray-700">Deskripsi Produk</p>
+  <span class="text-green-500">Harga: Rp 100.000</span>
+</div>
+```
+
+selain itu saya juga menambahkan `delete` dan `edit`
+## Navigasi Bar (Navbar) yang Responsif
+
+Navbar yang digunakan telah dioptimalkan untuk tampil dengan baik di berbagai ukuran layar. Menggunakan Tailwind CSS, navbar ini menyesuaikan tampilan dan fungsionalitasnya pada perangkat mobile dan desktop.
+
+### Contoh Struktur Navbar
+
+```html
+<nav class="bg-gradient-to-b from-[#312E81] to-[#5954DC] shadow-lg fixed top-0 left-0 z-40 w-screen">
+  <div class="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <h1 class="text-2xl font-bold text-white">🌷DYAS FLOWERS🌷</h1>
+      <div class="hidden md:flex items-center space-x-4">
+        <a href="#home" class="text-white hover:bg-blue-500 px-3 py-2 rounded transition duration-300">Home</a>
+        <a href="#category" class="text-white hover:bg-blue-500 px-3 py-2 rounded transition duration-300">Category</a>
+        <a href="#cart" class="text-white hover:bg-blue-500 px-3 py-2 rounded transition duration-300">Cart</a>
+      </div>
+    </div>
+  </div>
+</nav>
+```
