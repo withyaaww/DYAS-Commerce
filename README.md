@@ -19,6 +19,7 @@ Aplikasi PWS yang sudah di-deploy dapat diakses melalui tautan berikut:
 - [TUGAS INDIVIDU 3](#tugas-individu-3)
 - [TUGAS INDIVIDU 4](#tugas-individu-4)
 - [TUGAS INDIVIDU 5](#tugas-individu-5)
+- [TUGAS INDIVIDU 6](#tugas-individu-6)
 
 
 ***
@@ -530,3 +531,93 @@ Navbar yang digunakan telah dioptimalkan untuk tampil dengan baik di berbagai uk
   </div>
 </nav>
 ```
+---
+#           TUGAS INDIVIDU 6
+---
+
+## Manfaat Penggunaan JavaScript dalam Pengembangan Aplikasi Web
+
+JavaScript adalah bahasa pemrograman yang sangat penting dalam pengembangan aplikasi web modern. Berikut adalah beberapa manfaat utamanya:
+
+- **Interaktivitas**: JavaScript memungkinkan pengembang untuk membuat halaman web yang interaktif dan responsif, meningkatkan pengalaman pengguna dengan elemen dinamis seperti formulir, animasi, dan konten yang dapat diperbarui tanpa memuat ulang halaman.
+- **Pengolahan Data di Klien**: Dengan JavaScript, data dapat diproses langsung di sisi klien, mengurangi beban server dan mempercepat waktu respons aplikasi.
+- **Kompatibilitas**: JavaScript didukung oleh semua browser modern, menjadikannya pilihan yang universal untuk pengembangan web.
+- **Ekosistem yang Luas**: Terdapat banyak pustaka dan framework (seperti React, Angular, dan Vue.js) yang memudahkan pengembangan aplikasi kompleks.
+
+## Fungsi Penggunaan `await` dalam `fetch()`
+
+Keyword `await` digunakan untuk menunggu hasil dari promise yang dikembalikan oleh fungsi `fetch()`. Berikut adalah penjelasan lebih lanjut:
+
+- **Menunggu Respons**: Dengan menggunakan `await`, eksekusi kode akan ditunda hingga promise selesai, sehingga kita bisa mendapatkan hasilnya secara langsung. Hal ini membuat kode lebih mudah dibaca dan ditulis dibandingkan dengan menggunakan metode `.then()`.
+- **Tanpa `await`**: Jika kita tidak menggunakan `await`, kode akan melanjutkan eksekusi tanpa menunggu hasil dari `fetch()`, yang dapat menyebabkan kesalahan jika kita mencoba mengakses data sebelum tersedia. Ini bisa mengakibatkan error atau data yang tidak terdefinisi ketika mencoba memproses hasilnya.
+
+### Contoh Penggunaan `await`
+
+```javascript
+ async function refreshFlowers() {
+    document.getElementById("product").innerHTML = "";
+    document.getElementById("product").className = "";
+    const flowers = await getFlowers();
+    let htmlString = "";
+    let classNameString = "";
+    ....
+```
+
+## Pentingnya Menggunakan Decorator `csrf_exempt` pada View untuk AJAX POST
+
+Decorator `csrf_exempt` digunakan untuk menghindari pemeriksaan CSRF (Cross-Site Request Forgery) pada view tertentu yang digunakan untuk menerima permintaan AJAX POST. Alasan penggunaannya meliputi:
+
+- **Permintaan AJAX**: Permintaan AJAX sering kali tidak menyertakan token CSRF secara otomatis. Dengan menggunakan `csrf_exempt`, kita memastikan bahwa view dapat diakses tanpa token tersebut, sehingga permintaan dari klien tetap dapat diproses.
+- **Keamanan**: Meskipun menggunakan `csrf_exempt`, penting untuk memastikan bahwa view tersebut aman dari serangan lain, seperti validasi input dan otentikasi pengguna.
+
+### Contoh Penggunaan `csrf_exempt`
+
+```python
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+@require_POST
+def add_flowers_ajax(request):
+    name = strip_tags(request.POST.get("name"))  # strip HTML tags!
+    description = strip_tags(request.POST.get("description"))  # strip HTML tags!
+    price = strip_tags(request.POST.get("price"))  # strip HTML tags!
+    stock = strip_tags(request.POST.get("stock"))  # strip HTML tags!
+    category = strip_tags(request.POST.get("category", "General"))  # Default category
+    
+    # Mendapatkan user yang login
+    user = request.user
+
+    # Membuat objek Product baru
+    new_product = Product(
+        user=user,
+        name=name, description=description,
+        price=price, stock=stock,
+        category=category
+    )
+    
+    new_product.save()  
+```
+
+## Pembersihan Data Input Pengguna di Backend
+
+Pembersihan data input pengguna di backend adalah langkah penting meskipun sudah ada validasi di frontend. Berikut alasannya:
+
+- **Keamanan Tambahan**: Validasi di frontend dapat dengan mudah dihindari oleh pengguna jahat. Dengan melakukan pembersihan di backend, kita menambah lapisan keamanan tambahan untuk memastikan bahwa data yang diterima aman dan sesuai.
+- **Konsistensi Data**: Pembersihan di backend membantu menjaga konsistensi data dalam aplikasi, terlepas dari bagaimana data dikirimkan dari klien. Ini penting untuk integritas database dan logika aplikasi secara keseluruhan.
+
+### Contoh Pembersihan Data
+
+```python
+ def clean_name(self):
+        name = self.cleaned_data["name"]
+        return strip_tags(name)
+
+    def clean_description(self):
+        description = self.cleaned_data["description"]
+        return strip_tags(description)
+```
+
+## Implementasi Checklist Secara Step-by-Step
+
+Berikut adalah langkah-langkah implementasi checklist dalam pengembangan aplikasi:
+

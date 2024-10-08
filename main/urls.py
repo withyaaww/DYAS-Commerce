@@ -1,5 +1,5 @@
 from django.urls import path
-from main.views import show_main, create_flowers, show_xml, show_json, show_xml_by_id, show_json_by_id, register, login_user, logout_user, edit_pesanan, delete_pesanan
+from main.views import show_main, create_flowers, show_xml, show_json, show_xml_by_id, show_json_by_id, register, login_user, logout_user, edit_pesanan, delete_pesanan, add_flowers_ajax
 
 app_name = 'main'
 
@@ -15,4 +15,5 @@ urlpatterns = [
     path('logout/', logout_user, name='logout'),
     path('edit/<uuid:id>', edit_pesanan, name='edit_pesanan'),
     path('delete/<uuid:id>', delete_pesanan, name='delete_pesanan'),
+    path('create-flowes-ajax', add_flowers_ajax, name='add_flowers_ajax')
 ]
