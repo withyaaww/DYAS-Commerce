@@ -621,3 +621,17 @@ Pembersihan data input pengguna di backend adalah langkah penting meskipun sudah
 
 Berikut adalah langkah-langkah implementasi checklist dalam pengembangan aplikasi:
 
+**step ajax get**
+yaitu menghapus kondisi {% if product .. %} yang berisi bagian card di `main.html`dan menggantinya dengan sebuah div placeholder, kemudian menambahkan sebuah script untuk mengambil data produk dari server melalui AJAX GET, hanya untuk produk yang dimiliki oleh pengguna yang sedang login.
+
+**step ajax post**
+ menambahkan tombol di halaman yang, saat diklik, membuka modal berisi formulir untuk menambahkan produk baru.
+
+  Formulir ini mengirimkan data produk baru ke server menggunakan AJAX POST. Di sisi server, saya membuat tampilan baru untuk menangani permintaan POST ini. Pada tampilan tersebut, data produk seperti nama, harga, deskripsi, category dan stok diambil dari formulir. Sebelum disimpan ke database, saya menggunakan fungsi strip_tags() untuk memastikan bahwa input pengguna bebas dari HTML tags yang dapat membahayakan.
+**step validasi data produk**
+ menambahkan metode clean untuk memvalidasi input. Contohnya, fungsi clean_name dan clean_description digunakan untuk memastikan bahwa nama dan deskripsi produk yang diinput tidak mengandung tag HTML. 
+ 
+ Tujuan dari ini adalah untuk meningkatkan keamanan dan memastikan bahwa input yang diterima aman untuk disimpan ke dalam database.
+
+**step update product**
+ halaman utama diperbarui secara asinkron tanpa perlu melakukan reload penuh menggunakan AJAX. Fungsi JavaScript yang bertugas mengambil data produk (refreshProducts()) dipanggil untuk memperbarui daftar produk di halaman. Dengan cara ini, pengalaman pengguna menjadi lebih dinamis, karena mereka dapat melihat produk yang baru saja ditambahkan secara langsung tanpa harus menyegarkan halaman secara manual.
